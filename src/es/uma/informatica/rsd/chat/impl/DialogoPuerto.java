@@ -33,7 +33,7 @@ public class DialogoPuerto extends javax.swing.JDialog {
 	 *
 	 */
 	
-	public static class PuertoAlias
+	public static class AliasPort
 	{
 		public int puerto;
 		public String alias;
@@ -46,7 +46,7 @@ public class DialogoPuerto extends javax.swing.JDialog {
 	private JLabel jLabel2;
 	private JTextField alias;
 
-	private PuertoAlias resultado=null;
+	private AliasPort resultado=null;
 
 	/**
 	* Auto-generated main method to display this JDialog
@@ -72,7 +72,7 @@ public class DialogoPuerto extends javax.swing.JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				resultado = new PuertoAlias();
+				resultado = new AliasPort();
 				
 				try
 				{
@@ -148,7 +148,7 @@ public class DialogoPuerto extends javax.swing.JDialog {
 		}
 	}
 	
-	public PuertoAlias getPuertoAlias()
+	public AliasPort getPuertoAlias()
 	{
 		resultado = null;
 		setVisible(true);

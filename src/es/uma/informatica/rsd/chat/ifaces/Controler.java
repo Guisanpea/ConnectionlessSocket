@@ -9,7 +9,7 @@ import java.net.SocketAddress;
  *
  */
 
-public interface Controlador extends ActionListener
+public interface Controler extends ActionListener
 {
 	// Cadenas de comando para botones
 	public static final String NUEVO = "nuevo";
@@ -17,10 +17,10 @@ public interface Controlador extends ActionListener
 	public static final String PREFIJO_CERRAR = "cerrar";
 	
 	/**
-	 * Este método es invocado por el componente de comunicación para indicar que se ha recibido
-	 * un mensaje de un determinado proceso cuya dirección de socket se indica.
-	 * @param sa Dirección de socket del proceso que envió el mensaje.
-	 * @param mensaje Mensaje que envió dicho proceso.
+	 * Este mï¿½todo es invocado por el componente de comunicaciï¿½n para indicar que se ha recibido
+	 * un mensaje de un determinado proceso cuya direcciï¿½n de socket se indica.
+	 * @param sa Direcciï¿½n de socket del proceso que enviï¿½ el mensaje.
+	 * @param mensaje Mensaje que enviï¿½ dicho proceso.
 	 */
 	public void mostrarMensaje(SocketAddress sa, String alias, String mensaje);
 }

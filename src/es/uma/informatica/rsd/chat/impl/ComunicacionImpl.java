@@ -4,18 +4,18 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
 import es.uma.informatica.rsd.chat.ifaces.Comunicacion;
-import es.uma.informatica.rsd.chat.ifaces.Controlador;
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.PuertoAlias;
+import es.uma.informatica.rsd.chat.ifaces.Controler;
+import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
 
 // Clase a implementar 
 public class ComunicacionImpl implements Comunicacion {
 
 	@Override
-	public void crearSocket(PuertoAlias pa) {
+	public void crearSocket(AliasPort pa) {
 	}
 
 	@Override
-	public void setControlador(Controlador c) {
+	public void setControlador(Controler c) {
 	}
 
 	@Override

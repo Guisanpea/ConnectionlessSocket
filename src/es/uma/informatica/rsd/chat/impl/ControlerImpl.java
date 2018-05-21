@@ -1,7 +1,6 @@
 package es.uma.informatica.rsd.chat.impl;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.HashMap;
@@ -12,11 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import es.uma.informatica.rsd.chat.ifaces.Comunicacion;
-import es.uma.informatica.rsd.chat.ifaces.Controlador;
+import es.uma.informatica.rsd.chat.ifaces.Controler;
 import es.uma.informatica.rsd.chat.ifaces.Vista;
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.PuertoAlias;
+import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
 
-public class ControladorImpl implements Controlador
+public class ControlerImpl implements Controler
 {
 	private Vista v;
 	private Comunicacion c;
@@ -26,7 +25,7 @@ public class ControladorImpl implements Controlador
 	
 	private String alias;
 	
-	public ControladorImpl()
+	public ControlerImpl()
 	{
 		conversaciones = new HashMap<String,InetSocketAddress>();
 	}
@@ -46,7 +45,7 @@ public class ControladorImpl implements Controlador
 		frame.pack();
 		frame.setVisible(true);
 		
-		PuertoAlias pa = v.getPuertoEscuchaAlias();
+		AliasPort pa = v.getPuertoEscuchaAlias();
 		String error=null;
 		while ((error=correctoPA(pa))!=null)
 		{
@@ -69,7 +68,7 @@ public class ControladorImpl implements Controlador
 		
 	}
 
-	private String correctoPA(PuertoAlias pa) {
+	private String correctoPA(AliasPort pa) {
 		if (pa == null)
 		{
 			return "Debe indicar el puerto de escucha y un alias";
@@ -80,7 +79,7 @@ public class ControladorImpl implements Controlador
 		}
 		else if (pa.alias.indexOf(',')>=0)
 		{
-			return "El alias no puede contener el símbolo >";
+			return "El alias no puede contener el sï¿½mbolo >";
 		}
 		
 		return null;
@@ -91,7 +90,7 @@ public class ControladorImpl implements Controlador
 	 */
 	public static void main(String[] args)
 	{
-		new ControladorImpl().run(args);
+		new ControlerImpl().run(args);
 	}
 
 	@Override
@@ -104,7 +103,7 @@ public class ControladorImpl implements Controlador
 			InetSocketAddress sa = v.getIPPuerto();
 			if (sa == null)
 			{
-				// El usuario ha cancelado la introducción de datos
+				// El usuario ha cancelado la introducciï¿½n de datos
 				return;
 			}
 			// else
@@ -121,7 +120,7 @@ public class ControladorImpl implements Controlador
 			}
 			else
 			{
-				v.warning("Conversación", "La ventana de conversación ya existe");
+				v.warning("Conversaciï¿½n", "La ventana de conversaciï¿½n ya existe");
 			}
 		}
 		else if (ac.startsWith(PREFIJO_ENVIAR))

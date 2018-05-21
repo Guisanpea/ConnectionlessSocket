@@ -16,7 +16,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-import es.uma.informatica.rsd.chat.ifaces.Controlador;
+import es.uma.informatica.rsd.chat.ifaces.Controler;
 import es.uma.informatica.rsd.chat.ifaces.Vista;
 
 /**
@@ -42,7 +42,7 @@ public class VConversacion extends javax.swing.JPanel{
 	
 	private String nombre;
 	
-	private Controlador c;
+	private Controler c;
 	
 	public VConversacion(String nombre)
 	{
@@ -120,7 +120,7 @@ public class VConversacion extends javax.swing.JPanel{
 		}
 	}
 	
-	public void setControlador(Controlador c)
+	public void setControlador(Controler c)
 	{
 		this.c = c;
 		ActionListener limpiar = new ActionListener(){

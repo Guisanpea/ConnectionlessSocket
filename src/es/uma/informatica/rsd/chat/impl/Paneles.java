@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
-import es.uma.informatica.rsd.chat.ifaces.Controlador;
+import es.uma.informatica.rsd.chat.ifaces.Controler;
 import es.uma.informatica.rsd.chat.ifaces.Vista;
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.PuertoAlias;
+import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -39,7 +39,7 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 	private JTabbedPane paneles;
 	private JPanel jPanel1;
 	private JButton nuevo;
-	private Controlador al;
+	private Controler al;
 
 	/**
 	* Auto-generated main method to display this 
@@ -145,16 +145,16 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 	}
 
 	@Override
-	public void setControlador(Controlador al)
+	public void setControlador(Controler al)
 	{
 		this.al= al;
 		nuevo.addActionListener(al);
 	}
 
 	@Override
-	public PuertoAlias getPuertoEscuchaAlias()
+	public AliasPort getPuertoEscuchaAlias()
 	{
-		PuertoAlias pa = getDialogoPuerto().getPuertoAlias();
+		AliasPort pa = getDialogoPuerto().getPuertoAlias();
 		if (pa != null)
 		{
 			puertoEscucha = pa.puerto;

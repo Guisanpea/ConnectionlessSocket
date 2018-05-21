@@ -2,7 +2,7 @@ package es.uma.informatica.rsd.chat.ifaces;
 
 import java.net.InetSocketAddress;
 
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.PuertoAlias;
+import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
 
 /**
  * Interfaz de la vista.
@@ -17,62 +17,62 @@ public interface Vista
 	
 	
 	/**
-	 * Este método se utiliza para crear ventanas de conversación.
-	 * @param nombre Nombre de la ventana de conversación. Debe ser único.
+	 * Este mï¿½todo se utiliza para crear ventanas de conversaciï¿½n.
+	 * @param nombre Nombre de la ventana de conversaciï¿½n. Debe ser ï¿½nico.
 	 * @return Si todo fue correcto devuelve true. En caso de que ya existiera una 
 	 * ventana con ese nombre devuelve false.
 	 */
 	public boolean crearPanel (String nombre);
 	
 	/**
-	 * Este método se utiliza para cerrar ventanas de conversación. 
-	 * @param nombre Nombre de la ventana de conversación a cerrar.
+	 * Este mï¿½todo se utiliza para cerrar ventanas de conversaciï¿½n. 
+	 * @param nombre Nombre de la ventana de conversaciï¿½n a cerrar.
 	 * @return Devuelve true si todo fue bien y false si la ventana no existe.
 	 */
 	public boolean cerrarPanel (String nombre);
 	
 	/**
-	 * Este método lo invca el controlador para escribir un mensaje en la ventana de
-	 * conversación indicada como primer argumento.
-	 * @param nombre Nombre de la ventana de conversación.
+	 * Este mï¿½todo lo invca el controlador para escribir un mensaje en la ventana de
+	 * conversaciï¿½n indicada como primer argumento.
+	 * @param nombre Nombre de la ventana de conversaciï¿½n.
 	 * @param mensaje Mensaje a escribir en la ventana.
 	 * @param estilo Estilo del mensaje. Pueder ser "propio" o "ajeno" para indicar 
-	 * de quién procede el texto.
+	 * de quiï¿½n procede el texto.
 	 */
 	public void mostrarMensaje (String nombre, String mensaje, String estilo);
 	
 	/**
-	 * Este método se llama al inicio para conectar la vista al controlador
-	 * @param al Controlador.
+	 * Este mï¿½todo se llama al inicio para conectar la vista al controlador
+	 * @param al Controler.
 	 */
-	public void setControlador (Controlador al);
+	public void setControlador (Controler al);
 	
 	/**
-	 * Este método se usará al comienzo de la sesión para preguntar al usuario el puerto
-	 * en el que escuchará el programa.
-	 * @return Devuelve el número de puerto introducido por el usuario.
+	 * Este mï¿½todo se usarï¿½ al comienzo de la sesiï¿½n para preguntar al usuario el puerto
+	 * en el que escucharï¿½ el programa.
+	 * @return Devuelve el nï¿½mero de puerto introducido por el usuario.
 	 */
-	public PuertoAlias getPuertoEscuchaAlias();
+	public AliasPort getPuertoEscuchaAlias();
 	
 	/**
-	 * Este método se usará cada vez que el usuario solicite crear una nueva ventana de 
-	 * conversación para preguntar por la dirección IP y el puerto al que se deben enviarse
+	 * Este mï¿½todo se usarï¿½ cada vez que el usuario solicite crear una nueva ventana de 
+	 * conversaciï¿½n para preguntar por la direcciï¿½n IP y el puerto al que se deben enviarse
 	 * los mensajes.
-	 * @return Devuelve la dirección de socket a la que hay que enviar los mensajes.
+	 * @return Devuelve la direcciï¿½n de socket a la que hay que enviar los mensajes.
 	 */
 	public InetSocketAddress getIPPuerto();
 	
 	/**
-	 * Este método se utiliza para obtener el mensaje que el usuario escribió en una 
-	 * determinada ventana de conversación.
-	 * @param nombre Nombre de la ventana de conversación.
+	 * Este mï¿½todo se utiliza para obtener el mensaje que el usuario escribiï¿½ en una 
+	 * determinada ventana de conversaciï¿½n.
+	 * @param nombre Nombre de la ventana de conversaciï¿½n.
 	 * @return
 	 */
 	public String getMensaje(String nombre);
 	
 	/**
 	 * Muestra un mensaje de advertencia en una ventana modal.
-	 * @param titulo Título de la ventana.
+	 * @param titulo Tï¿½tulo de la ventana.
 	 * @param mensaje Mensaje.
 	 */
 	public void warning(String titulo, String mensaje);

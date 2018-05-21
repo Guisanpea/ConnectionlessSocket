@@ -3,13 +3,13 @@ package es.uma.informatica.rsd.chat.ifaces;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.PuertoAlias;
+import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
 
 /**
- * Interfaz del componente de comunicación. 
+ * Interfaz del componente de comunicaciï¿½n. 
  * Este componente debe ser implementado por el alumno.
  * Los segmentos UDP que se intercambian las entidades tienen el siguiente formato:
- * - IP Multicast si es un envío multicast, sino vacío
+ * - IP Multicast si es un envï¿½o multicast, sino vacï¿½o
  * - Una coma
  * - Alias
  * - Una coma
@@ -20,39 +20,39 @@ import es.uma.informatica.rsd.chat.impl.DialogoPuerto.PuertoAlias;
 public interface Comunicacion
 {
 	/**
-	 * Crea un socket UDP asociado al puerto indicado que se usará en toda la sesión de chat.
+	 * Crea un socket UDP asociado al puerto indicado que se usarï¿½ en toda la sesiï¿½n de chat.
 	 * @param puerto
 	 */
-	public void crearSocket(PuertoAlias pa);
+	public void crearSocket(AliasPort pa);
 	
 	/**
 	 * Establece el controlador para que sea posible avisar de la llegada de nuevos mensajes
 	 * @param c
 	 */
-	public void setControlador(Controlador c);
+	public void setControlador(Controler c);
 	
 	/**
 	 * Ejecuta un preocso que se encarga de leer los mensajes que llegan por la red y
-	 * avisar al controlador de su llegada para que muestre la información en la GUI.
+	 * avisar al controlador de su llegada para que muestre la informaciï¿½n en la GUI.
 	 */
 	public void runReceptor();
 	
 	/**
-	 * Envía un mensaje a una dirección de socket indicada.
-	 * @param sa Dirección de socket a la que enviar el mensaje
+	 * Envï¿½a un mensaje a una direcciï¿½n de socket indicada.
+	 * @param sa Direcciï¿½n de socket a la que enviar el mensaje
 	 * @param mensaje Mensaje a enviar
 	 */
 	public void envia(InetSocketAddress sa, String mensaje);
 	
 	/**
 	 * Debe unirse al grupo multicast indicado.
-	 * @param multi Dirección multicast.
+	 * @param multi Direcciï¿½n multicast.
 	 */
 	public void joinGroup(InetAddress multi);
 	
 	/**
 	 * Debe desvincularse del grupo multicast indicado.
-	 * @param multi Dirección multicast.
+	 * @param multi Direcciï¿½n multicast.
 	 */
 	public void leaveGroup (InetAddress multi);
 }
