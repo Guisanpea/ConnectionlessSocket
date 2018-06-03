@@ -8,13 +8,16 @@ import java.io.IOException;
 import java.net.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class CommunicationImpl implements Comunication {
 
     private static final String EMPTY = "";
+    public static final String SPLITTER = "!";
     private Controler messageDisplayer;
     private MulticastSocket udpSocket;
     private String alias;
@@ -77,7 +80,7 @@ public class CommunicationImpl implements Comunication {
     }
 
     private boolean isMulticast(String message) {
-        return !message.split("!")[0].isEmpty();
+        return !message.split(SPLITTER)[0].isEmpty();
     }
 
 
@@ -94,10 +97,11 @@ public class CommunicationImpl implements Comunication {
     }
 
     private byte[] toBuffer(InetSocketAddress socketAddress, String message) {
-        return String.format("%s!%s!%s",
-                socketAddress.getAddress().isMulticastAddress() ? socketAddress.getAddress() : EMPTY,
+        return Stream.of(
+                socketAddress.getAddress().isMulticastAddress() ? socketAddress.getAddress().toString() : EMPTY,
                 alias,
-                message).getBytes(UTF_8);
+                message)
+                .collect(joining(SPLITTER)).getBytes(UTF_8);
     }
 
     @Override
