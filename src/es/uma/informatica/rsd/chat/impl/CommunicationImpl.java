@@ -1,15 +1,13 @@
 package es.uma.informatica.rsd.chat.impl;
 
-import java.io.IOException;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
-
 import es.uma.informatica.rsd.chat.ifaces.Comunication;
 import es.uma.informatica.rsd.chat.ifaces.Controler;
 import es.uma.informatica.rsd.chat.impl.PortDialog.AliasPort;
+
+import java.io.IOException;
+import java.net.*;
+import java.util.Collections;
+import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.stream.Collectors.toList;
@@ -19,10 +17,9 @@ public class CommunicationImpl implements Comunication {
     private Controler messageDisplayer;
     private MulticastSocket udpSocket;
     private String alias;
-    private final Map<InetSocketAddress, String> aliasMap = new HashMap<>();
     private final List<InetAddress> localAddress;
 
-    public CommunicationImpl() {
+    CommunicationImpl() {
         try {
             localAddress = Collections.list(NetworkInterface.getNetworkInterfaces()).stream()
                     .map(NetworkInterface::getInetAddresses)
@@ -41,9 +38,7 @@ public class CommunicationImpl implements Comunication {
 
         try {
             udpSocket = new MulticastSocket(puerto.puerto);
-            System.out.println(udpSocket.getLocalSocketAddress());
-
-            aliasMap.put(((InetSocketAddress) udpSocket.getLocalSocketAddress()), puerto.alias);
+            alias = puerto.alias;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,9 +61,8 @@ public class CommunicationImpl implements Comunication {
                 message = new String(packet.getData(), UTF_8);
 
                 InetSocketAddress sender = InetSocketAddress.class.cast(packet.getSocketAddress());
-                String senderAlias = aliasMap.getOrDefault(sender, sender.toString());
                 if (!sender.getAddress().isMulticastAddress() || !localAddress.contains(sender.getAddress()))
-                    messageDisplayer.showMessage(sender, senderAlias, message);
+                    messageDisplayer.showMessage(sender, "", message);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -78,7 +72,10 @@ public class CommunicationImpl implements Comunication {
 
     @Override
     public void send(InetSocketAddress socketAddress, String message) {
-        byte[] buffer = message.getBytes(UTF_8);
+        byte[] buffer = String.format("%s!%s!%s",
+                socketAddress.getAddress().isMulticastAddress() ? "" : socketAddress.getAddress(),
+                alias,
+                message).getBytes(UTF_8);
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length, socketAddress);
 
         try {

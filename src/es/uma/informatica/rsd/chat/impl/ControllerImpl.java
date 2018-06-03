@@ -53,11 +53,7 @@ public class ControllerImpl implements Controler {
         comunication.createSocket(aliasPort);
         alias = aliasPort.alias;
 
-        Thread t = new Thread() {
-            public void run() {
-                comunication.runReceptor();
-            }
-        };
+        Thread t = new Thread(() -> comunication.runReceptor());
 
         t.setDaemon(true);
         t.start();

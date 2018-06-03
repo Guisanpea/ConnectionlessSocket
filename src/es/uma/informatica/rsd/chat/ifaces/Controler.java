@@ -12,9 +12,9 @@ import java.net.SocketAddress;
 public interface Controler extends ActionListener
 {
 	// Cadenas de comando para botones
-	public static final String NUEVO = "nuevo";
-	public static final String SEND_PREFIX = "enviar";
-	public static final String CLOSE_PREFIX = "cerrar";
+	String NUEVO = "nuevo";
+	String SEND_PREFIX = "enviar";
+	String CLOSE_PREFIX = "cerrar";
 	
 	/**
 	 * Este metodo es invocado por el componente de comunicaci�n para indicar que se ha recibido
