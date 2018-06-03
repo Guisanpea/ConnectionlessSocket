@@ -29,7 +29,7 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class DialogoIPPuerto extends javax.swing.JDialog {
+public class IPPortDialog extends javax.swing.JDialog {
 	private JLabel jLabel1;
 	private JLabel jLabel2;
 	private JRadioButton multicast;
@@ -52,13 +52,13 @@ public class DialogoIPPuerto extends javax.swing.JDialog {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				JFrame frame = new JFrame();
-				DialogoIPPuerto inst = new DialogoIPPuerto(frame,0);
+				IPPortDialog inst = new IPPortDialog(frame,0);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public DialogoIPPuerto(Frame frame, int puertoEscucha) {
+	public IPPortDialog(Frame frame, int puertoEscucha) {
 		super(frame,"IP y puerto",true);
 		initGUI();
 		setListeners();
@@ -72,7 +72,7 @@ public class DialogoIPPuerto extends javax.swing.JDialog {
 			getContentPane().setLayout(thisLayout);
 			{
 				jLabel1 = new JLabel();
-				jLabel1.setText("Dirección IP");
+				jLabel1.setText("Direcciï¿½n IP");
 			}
 			{
 				ip = new JTextField();
@@ -162,15 +162,15 @@ public class DialogoIPPuerto extends javax.swing.JDialog {
 				resultado = new InetSocketAddress(ip.getText(),Integer.parseInt(puerto.getText()));
 				if (multicast.isSelected() && !resultado.getAddress().isMulticastAddress())
 				{
-					JOptionPane.showMessageDialog(GUIUtils.getOwningFrame(DialogoIPPuerto.this),
-						    "La dirección IP no es de un grupo multicast",
+					JOptionPane.showMessageDialog(GUIUtils.getOwningFrame(IPPortDialog.this),
+						    "La direcciï¿½n IP no es de un grupo multicast",
 						    "Multicast",
 						    JOptionPane.WARNING_MESSAGE);
 				}
 				else if (unicast.isSelected() && resultado.getAddress().isMulticastAddress())
 				{
-					JOptionPane.showMessageDialog(GUIUtils.getOwningFrame(DialogoIPPuerto.this),
-						    "La dirección IP no es unicast",
+					JOptionPane.showMessageDialog(GUIUtils.getOwningFrame(IPPortDialog.this),
+						    "La direcciï¿½n IP no es unicast",
 						    "Unicast",
 						    JOptionPane.WARNING_MESSAGE);
 				}

@@ -25,7 +25,7 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class DialogoPuerto extends javax.swing.JDialog {
+public class PortDialog extends javax.swing.JDialog {
 	
 	/**
 	 * Esta clase contiene los datos que se piden al usuario al inicio del Chat:
@@ -55,13 +55,13 @@ public class DialogoPuerto extends javax.swing.JDialog {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				JFrame frame = new JFrame();
-				DialogoPuerto inst = new DialogoPuerto(frame);
+				PortDialog inst = new PortDialog(frame);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public DialogoPuerto(Frame frame) {
+	public PortDialog(Frame frame) {
 		super(frame,"Puerto",true);
 		initGUI();
 	}

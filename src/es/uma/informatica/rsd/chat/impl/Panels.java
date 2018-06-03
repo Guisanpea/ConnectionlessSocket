@@ -13,8 +13,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
 import es.uma.informatica.rsd.chat.ifaces.Controler;
-import es.uma.informatica.rsd.chat.ifaces.Vista;
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
+import es.uma.informatica.rsd.chat.ifaces.View;
+import es.uma.informatica.rsd.chat.impl.PortDialog.AliasPort;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -28,13 +28,13 @@ import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class Paneles extends javax.swing.JPanel implements Vista{
+public class Panels extends javax.swing.JPanel implements View {
 	
-	private DialogoIPPuerto dialogo;
-	private DialogoPuerto escucha;
+	private IPPortDialog dialogo;
+	private PortDialog escucha;
 	private int puertoEscucha;
 	
-	private Map<String, VConversacion> map;
+	private Map<String, VConversation> map;
 	
 	private JTabbedPane paneles;
 	private JPanel jPanel1;
@@ -47,16 +47,16 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 	*/
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new Paneles());
+		frame.getContentPane().add(new Panels());
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
 	
-	public Paneles() {
+	public Panels() {
 		super();
 		initGUI();
-		map = new HashMap<String,VConversacion>();
+		map = new HashMap<String,VConversation>();
 	}
 	
 	private void initGUI() {
@@ -85,32 +85,32 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 		}
 	}
 	
-	private DialogoIPPuerto getDialogoIPPuerto()
+	private IPPortDialog getDialogoIPPuerto()
 	{
 		if (dialogo == null)
 		{
-			dialogo = new DialogoIPPuerto (GUIUtils.getOwningFrame(this),puertoEscucha);
+			dialogo = new IPPortDialog(GUIUtils.getOwningFrame(this),puertoEscucha);
 		}
 		return dialogo;
 	}
 	
 	
-	private DialogoPuerto getDialogoPuerto()
+	private PortDialog getDialogoPuerto()
 	{
 		if (escucha == null)
 		{
-			escucha =  new DialogoPuerto (GUIUtils.getOwningFrame(this));
+			escucha =  new PortDialog(GUIUtils.getOwningFrame(this));
 		}
 		return escucha;
 	}
 	
 	@Override
-	public boolean crearPanel(String nombre)
+	public boolean createPanel(String nombre)
 	{	
-		VConversacion jp = map.get(nombre);
+		VConversation jp = map.get(nombre);
 		if (jp == null)
 		{
-			jp = new VConversacion(nombre);
+			jp = new VConversation(nombre);
 			paneles.add(nombre, jp);
 			map.put(nombre, jp);
 			jp.setControlador(al);
@@ -123,9 +123,9 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 	}
 
 	@Override
-	public boolean cerrarPanel(String nombre)
+	public boolean closePanel(String nombre)
 	{
-		VConversacion vc = map.get(nombre);
+		VConversation vc = map.get(nombre);
 		if (vc == null)
 		{
 			return false;
@@ -138,21 +138,21 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 	}
 
 	@Override
-	public void mostrarMensaje(String nombre, String mensaje, String estilo)
+	public void showMessages(String nombre, String mensaje, String estilo)
 	{		
-		VConversacion jp = map.get(nombre);
+		VConversation jp = map.get(nombre);
 		jp.mostrarMensaje(mensaje, estilo);
 	}
 
 	@Override
-	public void setControlador(Controler al)
+	public void setController(Controler al)
 	{
 		this.al= al;
 		nuevo.addActionListener(al);
 	}
 
 	@Override
-	public AliasPort getPuertoEscuchaAlias()
+	public AliasPort getAliasListeningPort()
 	{
 		AliasPort pa = getDialogoPuerto().getPuertoAlias();
 		if (pa != null)
@@ -164,13 +164,13 @@ public class Paneles extends javax.swing.JPanel implements Vista{
 	}
 
 	@Override
-	public InetSocketAddress getIPPuerto()
+	public InetSocketAddress getPortIP()
 	{
 		return getDialogoIPPuerto().muestra();
 	}
 	
 	@Override
-	public String getMensaje(String nombre)
+	public String getMessage(String nombre)
 	{
 		return map.get(nombre).getMensajeEntrada();
 	}

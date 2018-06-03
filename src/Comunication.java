@@ -1,5 +1,5 @@
 import es.uma.informatica.rsd.chat.ifaces.Controler;
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
+import es.uma.informatica.rsd.chat.impl.PortDialog.AliasPort;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

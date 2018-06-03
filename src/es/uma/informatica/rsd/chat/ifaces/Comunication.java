@@ -3,7 +3,7 @@ package es.uma.informatica.rsd.chat.ifaces;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
-import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
+import es.uma.informatica.rsd.chat.impl.PortDialog.AliasPort;
 
 /**
  * Interfaz del componente de comunicaci�n. 
@@ -17,42 +17,42 @@ import es.uma.informatica.rsd.chat.impl.DialogoPuerto.AliasPort;
  *
  */
 
-public interface Comunicacion
+public interface Comunication
 {
 	/**
 	 * Crea un socket UDP asociado al puerto indicado que se usar� en toda la sesi�n de chat.
 	 * @param puerto
 	 */
-	public void crearSocket(AliasPort pa);
-	
+	void createSocket(AliasPort puerto);
+
 	/**
 	 * Establece el controlador para que sea posible avisar de la llegada de nuevos mensajes
 	 * @param c
 	 */
-	public void setControlador(Controler c);
-	
+	void setController (Controler c);
+
 	/**
 	 * Ejecuta un preocso que se encarga de leer los mensajes que llegan por la red y
 	 * avisar al controlador de su llegada para que muestre la informaci�n en la GUI.
 	 */
-	public void runReceptor();
+	void runReceptor();
 	
 	/**
 	 * Env�a un mensaje a una direcci�n de socket indicada.
 	 * @param sa Direcci�n de socket a la que enviar el mensaje
-	 * @param mensaje Mensaje a enviar
+	 * @param message Mensaje a enviar
 	 */
-	public void envia(InetSocketAddress sa, String mensaje);
-	
+	void send(InetSocketAddress sa, String message);
+
 	/**
 	 * Debe unirse al grupo multicast indicado.
 	 * @param multi Direcci�n multicast.
 	 */
-	public void joinGroup(InetAddress multi);
+	void joinGroup(InetAddress multi);
 	
 	/**
 	 * Debe desvincularse del grupo multicast indicado.
 	 * @param multi Direcci�n multicast.
 	 */
-	public void leaveGroup (InetAddress multi);
+	void leaveGroup (InetAddress multi);
 }

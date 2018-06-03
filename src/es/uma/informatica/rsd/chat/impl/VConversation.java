@@ -17,7 +17,7 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 import es.uma.informatica.rsd.chat.ifaces.Controler;
-import es.uma.informatica.rsd.chat.ifaces.Vista;
+import es.uma.informatica.rsd.chat.ifaces.View;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -31,7 +31,7 @@ import es.uma.informatica.rsd.chat.ifaces.Vista;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class VConversacion extends javax.swing.JPanel{
+public class VConversation extends javax.swing.JPanel{
 	
 	private JTextPane dialogo;
 	private JPanel jPanel1;
@@ -44,7 +44,7 @@ public class VConversacion extends javax.swing.JPanel{
 	
 	private Controler c;
 	
-	public VConversacion(String nombre)
+	public VConversation(String nombre)
 	{
 		super();
 		this.nombre = nombre;
@@ -57,7 +57,7 @@ public class VConversacion extends javax.swing.JPanel{
 	*/
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new VConversacion("Prueba"));
+		frame.getContentPane().add(new VConversation("Prueba"));
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
@@ -68,10 +68,10 @@ public class VConversacion extends javax.swing.JPanel{
 		Style def = StyleContext.getDefaultStyleContext().
 	            getStyle(StyleContext.DEFAULT_STYLE);
 
-		Style propio = d.addStyle(Vista.PROPIO, def);
+		Style propio = d.addStyle(View.OWN, def);
 		StyleConstants.setForeground(propio, Color.blue);
 
-		Style ajeno = d.addStyle(Vista.AJENO, def);
+		Style ajeno = d.addStyle(View.FOREIGN, def);
 		StyleConstants.setForeground(ajeno, Color.red);
 	}
 	
@@ -99,19 +99,19 @@ public class VConversacion extends javax.swing.JPanel{
 					jPanel1.add(entrada);
 					entrada.setText("");
 					entrada.setPreferredSize(new java.awt.Dimension(562, 22));
-					entrada.setActionCommand(c.PREFIJO_ENVIAR+nombre);
+					entrada.setActionCommand(c.SEND_PREFIX +nombre);
 				}
 				{
 					enviar = new JButton();
 					jPanel1.add(enviar);
 					enviar.setText("Enviar");
-					enviar.setActionCommand(c.PREFIJO_ENVIAR+nombre);
+					enviar.setActionCommand(c.SEND_PREFIX +nombre);
 				}
 				{
 					cerrar = new JButton();
 					jPanel1.add(cerrar);
 					cerrar.setText("Cerrar");
-					cerrar.setActionCommand(c.PREFIJO_CERRAR+nombre);
+					cerrar.setActionCommand(c.CLOSE_PREFIX +nombre);
 					
 				}
 			}
