@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.toList;
 
 public class CommunicationImpl implements Comunication {
 
+    private static final String EMPTY = "";
     private Controler messageDisplayer;
     private MulticastSocket udpSocket;
     private String alias;
@@ -35,7 +36,6 @@ public class CommunicationImpl implements Comunication {
 
     @Override
     public void createSocket(AliasPort puerto) {
-
         try {
             udpSocket = new MulticastSocket(puerto.puerto);
             alias = puerto.alias;
@@ -45,37 +45,45 @@ public class CommunicationImpl implements Comunication {
     }
 
     @Override
-    public void setController(Controler c) {
-        messageDisplayer = c;
+    public void setController(Controler controler) {
+        messageDisplayer = controler;
     }
 
     @Override
     public void runReceptor() {
         while (true) {
-            String message;
-            byte[] buffer = new byte[BUFFER_LENGTH];
-            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            DatagramPacket packet = receivePacket();
+            String message = new String(packet.getData(), UTF_8);
 
-            try {
-                udpSocket.receive(packet);
-                message = new String(packet.getData(), UTF_8);
-
-                InetSocketAddress sender = InetSocketAddress.class.cast(packet.getSocketAddress());
-                if (!sender.getAddress().isMulticastAddress() || !localAddress.contains(sender.getAddress()))
-                    messageDisplayer.showMessage(sender, "", message);
-            } catch (IOException e) {
-                e.printStackTrace();
+            InetSocketAddress sender = toInetSocketAddress(packet.getSocketAddress());
+            if (!isMulticast(message) || !localAddress.contains(sender.getAddress())) {
+                messageDisplayer.showMessage(sender, EMPTY, message);
             }
         }
+    }
+
+    private DatagramPacket receivePacket() {
+        DatagramPacket packet = new DatagramPacket(new byte[BUFFER_LENGTH], BUFFER_LENGTH);
+        try {
+            udpSocket.receive(packet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return packet;
+    }
+
+    private InetSocketAddress toInetSocketAddress(SocketAddress socketAddress) {
+        return InetSocketAddress.class.cast(socketAddress);
+    }
+
+    private boolean isMulticast(String message) {
+        return !message.split("!")[0].isEmpty();
     }
 
 
     @Override
     public void send(InetSocketAddress socketAddress, String message) {
-        byte[] buffer = String.format("%s!%s!%s",
-                socketAddress.getAddress().isMulticastAddress() ? "" : socketAddress.getAddress(),
-                alias,
-                message).getBytes(UTF_8);
+        byte[] buffer = toBuffer(socketAddress, message);
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length, socketAddress);
 
         try {
@@ -83,6 +91,13 @@ public class CommunicationImpl implements Comunication {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private byte[] toBuffer(InetSocketAddress socketAddress, String message) {
+        return String.format("%s!%s!%s",
+                socketAddress.getAddress().isMulticastAddress() ? socketAddress.getAddress() : EMPTY,
+                alias,
+                message).getBytes(UTF_8);
     }
 
     @Override
